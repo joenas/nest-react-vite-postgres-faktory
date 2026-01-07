@@ -1,0 +1,44 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - ${PORT}:${PORT}
+    env_file: ./.env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://${DB_USERNAME}:${DB_PASSWORD}@db:${DB_PORT}/${DB_NAME}
+      FAKTORY_HOST: faktory222
+    depends_on:
+      - db
+      - faktory
+
+  db:
+    image: pgvector/pgvector:pg18-trixie
+    ports:
+      - "${DB_PORT}:5432"
+    env_file:
+      - ./.env
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    command: "-c log_statement=all"
+    volumes:
+      - postgresql-data:/var/lib/postgresql
+
+  faktory:
+    image: contribsys/faktory:latest
+    ports:
+      - 0.0.0.0:7419:7419
+      - 7420:7420
+    environment:
+      FAKTORY_PASSWORD: ${FAKTORY_PASSWORD}
+    volumes:
+      - faktory-data:/var/lib/faktory
+    command: "/faktory -b :7419 -w :7420"
+
+volumes:
+  faktory-data:
+  postgresql-data:

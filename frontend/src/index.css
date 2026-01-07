@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+
+  --bg: #f0eeeb;
+  --surface: #ffffff;
+  --surface-alt: #fafafa;
+
+  --text: #111111;
+  --muted: #777777;
+
+  --border: #e0e0e0;
+  --border-strong: #333333;
+
+  --link: #007bff;
+  --primary: #1f77b4;
+  --primary-contrast: #ffffff;
+
+  --danger: #cc3333;
+  --warning: #ff8800;
+  --success: #0a7a1f;
+}
+
+/* Explicit dark mode */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0f1115;
+  --surface: #151922;
+  --surface-alt: #111520;
+
+  --text: #e8eaf0;
+  --muted: #a6adbb;
+
+  --border: #2a3242;
+  --border-strong: #3a455a;
+
+  --link: #77b7ff;
+  --primary: #2b85c7;
+  --primary-contrast: #ffffff;
+
+  --danger: #ff6b6b;
+  --warning: #ff8800;
+  --success: #0a7a1f;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+#root {
+  min-height: 100vh;
+}
